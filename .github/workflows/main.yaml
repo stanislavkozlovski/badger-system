@@ -12,7 +12,8 @@ env:
 
 jobs:
 
-  tests:
+  # main workflow just checks if everything compiles for now
+  compiles:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,12 +25,6 @@ jobs:
         path: ~/.solcx
         key: ${{ runner.os }}-solcx-cache
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-
-    - name: Install Ganache
-      run: npm install -g ganache-cli@6.8.2
-
     - name: Setup Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -39,4 +34,4 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Tests
-      run: brownie test -C
+      run: brownie compile
